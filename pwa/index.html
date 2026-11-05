@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CBT SMP Negeri 3 Bojong</title>
+<style>
+:root{--pri:#4a67b0;--pri2:#2b3047;--acc:#f4552f;--bg:#f1f2f6;--card:#fff;--tx:#1d2233;--mut:#6b7385;--line:#e3e6ee;--bad:#c62828;--shadow:0 6px 18px rgba(43,48,71,.10);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151f;--card:#1d2233;--tx:#eef0f6;--mut:#9aa3b8;--line:#2e3550;--pri:#7f97dd;--shadow:0 6px 18px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#12151f;--card:#1d2233;--tx:#eef0f6;--mut:#9aa3b8;--line:#2e3550;--pri:#7f97dd;--shadow:0 6px 18px rgba(0,0,0,.35)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:"Poppins","Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;flex:none}
+#app{max-width:480px;margin:0 auto;height:100%;display:flex;flex-direction:column;position:relative;background:var(--bg);overflow:hidden}
+header{background:transparent;color:var(--tx);display:flex;align-items:center;gap:14px;padding:14px 16px 6px;font-size:22px;font-weight:700}
+header button{background:var(--card);border:0;color:var(--tx);font-size:22px;cursor:pointer;width:44px;height:44px;border-radius:50%;box-shadow:var(--shadow);display:grid;place-items:center;padding:0}
+main{flex:1;overflow:auto;padding:10px 16px 16px}
+.banner{height:168px;border-radius:28px;background:linear-gradient(135deg,#2b3047,#4a67b0 62%,#7d7ede);color:#fff;display:flex;flex-direction:row;align-items:center;gap:14px;padding:18px 18px 30px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.banner::before{content:"";position:absolute;right:-36px;top:-40px;width:150px;height:150px;border-radius:50%;background:#f76b4a;opacity:.9}
+.banner::after{content:"";position:absolute;right:46px;bottom:-34px;width:84px;height:84px;border-radius:50%;background:#3fbf96;opacity:.9}
+.banner>*{position:relative;z-index:1}
+.banner b{font-size:18px;line-height:1.25;letter-spacing:.02em}.logo{width:88px;height:auto;flex:none;filter:drop-shadow(0 3px 6px #0005)}.banner span{opacity:.9;font-size:12.5px}
+.card{background:var(--card);border-radius:28px;padding:20px;margin-top:-14px;position:relative;box-shadow:var(--shadow)}
+.card h3{margin:0;color:var(--tx);font-size:18px;font-weight:700}.card h4{margin:4px 0 16px;font-size:12.5px;font-weight:500;color:var(--mut)}
+#home .card{background:transparent;box-shadow:none;padding:6px 2px 0;margin-top:18px}
+#home .card h3{font-size:26px;line-height:1.15}
+.row{display:flex;gap:8px;align-items:center}
+input[type=text],input[type=password],input[type=number]{flex:1;width:100%;padding:14px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--tx);font-size:14.5px;box-shadow:var(--shadow);outline:none;font-family:inherit}
+input:focus{border-color:var(--pri)}
+.ib{background:var(--acc);border:0;font-size:22px;color:#fff;cursor:pointer;width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 18px rgba(244,85,47,.35)}
+.scan,.link{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;width:100%;height:112px;margin:18px 0 0;padding:16px 20px;border:0;border-radius:24px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:var(--shadow);font-family:inherit;text-align:right}
+.scan{background:#f76b4a}
+.scan::before,.link::before{content:"";position:absolute;right:-18px;top:-22px;width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.22)}
+.scan::after{content:"";position:absolute;left:-14px;bottom:-26px;width:70px;height:70px;border-radius:50%;background:#3fbf96}
+.link::after{content:"";position:absolute;left:-14px;bottom:-26px;width:70px;height:70px;border-radius:50%;background:#fda052}
+.scan i{position:absolute;left:18px;top:14px;font-style:normal;font-size:34px;line-height:1;opacity:.95}
+.link{background:var(--pri);margin:0 0 4px}
+.link i{position:absolute;left:18px;top:14px;font-style:normal;font-size:32px;line-height:1;opacity:.95}
+.mid{text-align:center;font-weight:600;font-size:12px;letter-spacing:.2em;color:var(--mut);margin:14px 0}
+.err{color:var(--bad);font-size:13px;margin:8px 4px 0;min-height:16px}
+nav{background:var(--card);display:flex;justify-content:space-around;align-items:center;padding:8px 10px;margin:0 14px 10px;border-radius:28px;box-shadow:0 10px 26px rgba(43,48,71,.16)}
+nav button{background:none;border:0;color:var(--mut);font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;min-width:56px;height:48px;justify-content:center;border-radius:20px;font-family:inherit}
+nav button.on{color:#fff;background:var(--pri)}nav button i{font-style:normal;font-size:22px;line-height:1;display:grid;place-items:center}
+#drawer{position:absolute;inset:0;display:none;z-index:20}
+#drawer.open{display:flex}
+#drawer .sheet{width:74%;background:var(--card);height:100%;display:flex;flex-direction:column;border-radius:0 28px 28px 0}
+#drawer .top{background:linear-gradient(135deg,#2b3047,#4a67b0);color:#fff;padding:60px 20px 20px;font-weight:700;border-radius:0 28px 0 0}
+#drawer .it{padding:16px 20px;display:flex;align-items:center;gap:16px;border:0;background:none;color:var(--tx);font-size:15px;font-weight:600;text-align:left;cursor:pointer;font-family:inherit}
+#drawer .it svg{font-size:22px;color:var(--pri)}
+#drawer .shade{flex:1;background:#0008}
+.exam{position:absolute;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:10}
+.exam.on{display:flex}
+.bar{background:var(--pri2);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font-size:13px;gap:8px}
+.bar button{background:#ffffff26;border:0;color:#fff;border-radius:999px;padding:7px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+.bar button:disabled{opacity:.4}
+.exam iframe{flex:1;border:0;width:100%;background:#fff}
+.sim{flex:1;overflow:auto;padding:16px}
+.q{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.q label{display:block;padding:6px 0}
+.hint{font-size:12px;color:var(--mut);padding:8px 14px;background:var(--card)}
+.ov{position:absolute;inset:0;background:#000d;color:#fff;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:40;flex-direction:column;gap:14px}
+.ov.on{display:flex}
+.pbox{background:var(--card);color:var(--tx);border-radius:20px;padding:20px;width:100%;max-width:440px;text-align:left;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 50px #0006}
+.pbox b{font-size:16px}.prow{display:flex;gap:8px;align-items:center}
+#pinIn{flex:1 1 auto;min-width:0;width:auto;padding:11px 16px;font-size:18px;letter-spacing:.25em;text-align:center}
+.pbox .err{margin:0}.pbox button{padding:11px 18px}
+.ov button,.pbtn{background:var(--pri);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:inherit}
+video{width:100%;border-radius:22px;background:#000;margin:10px 0}
+.about p{line-height:1.6;color:var(--mut)}
+[hidden]{display:none!important}
+.exi{display:block;width:100%;text-align:left;margin:10px 0 0;padding:15px 20px;border:0;border-radius:18px;background:#3fbf96;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+.exi:active{filter:brightness(.92)}
+.tk{flex:1;padding:10px 0;border:2px solid #3fbf96;border-radius:14px;background:#fff;color:#2b3047;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.tk.on{background:#3fbf96;color:#fff}
+</style>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#f1f2f6"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+<div id="app">
+  <header><button id="menuBtn" aria-label="Menu"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h16"/></svg></button><span id="title">Beranda</span></header>
+
+  <main id="home">
+    <div class="banner"><img class="logo" src="logo.png" alt="Logo SMP Negeri 3 Bojong"><div><b>SMP NEGERI 3 BOJONG</b><br><span>Kabupaten Pekalongan<br>Menuju Pendidikan Digital Berkualitas</span></div></div>
+    <div class="card">
+      <h3>CBT UJIAN ONLINE</h3>
+      <h4>SMP NEGERI 3 BOJONG KABUPATEN PEKALONGAN</h4>
+      <div class="row"><input type="text" id="url" placeholder="Masukkan link ujian (Google Form atau link lain)" autocomplete="off"><button class="ib" id="go" aria-label="Cari"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg></button></div>
+      <div class="err" id="err"></div>
+      <button class="scan" id="scanBtn"><i><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 14h2v2M14 18h2M18 18h2v2h-4"/></svg></i>Scan QR Code</button>
+      <div class="mid">ATAU</div>
+      <button class="link" id="simBtn"><i><svg class="ic" viewBox="0 0 24 24"><path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H11l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/><path d="M8 9h8M8 12h5"/></svg></i>LOGIN SIMULASI</button>
+      <video id="vid" playsinline muted hidden></video>
+      <canvas id="cv" hidden></canvas>
+      <div id="exBox" hidden><div class="mid">DAFTAR UJIAN DARI GURU</div>
+        <div id="tkRow" style="display:flex;gap:8px;justify-content:center;margin:8px 0"><button class="tk" data-tk="7">Kelas 7</button><button class="tk" data-tk="8">Kelas 8</button><button class="tk" data-tk="9">Kelas 9</button></div>
+        <div id="exList"></div><div id="exEmpty" class="err" style="text-align:center"></div></div>
+    </div>
+  </main>
+
+  <main id="about" class="about" hidden>
+    <div class="card" style="margin-top:0"><h3>Tentang Aplikasi</h3>
+      <p>Aplikasi CBT SMP Negeri 3 Bojong, Kabupaten Pekalongan.</p>
+    </div>
+    <div class="card" style="margin-top:14px"><h3>Mode pengguna</h3>
+      <p id="roleTxt"></p>
+      <button class="pbtn" id="roleBtn"></button>
+    </div>
+    <div class="card" id="tCard" style="margin-top:14px" hidden><h3>Pengaturan Guru / Admin</h3>
+      
+      <input type="password" id="pNew" inputmode="numeric" placeholder="PIN baru (4–12 angka)" style="margin-bottom:10px">
+      <button class="pbtn" id="pSave">Simpan PIN keluar siswa</button>
+      <div class="err" id="pMsg"></div>
+      <h3 style="margin-top:18px">PIN admin (guru)</h3>
+      
+      <input type="password" id="aNew" inputmode="numeric" placeholder="PIN admin baru (4–12 angka)" style="margin-bottom:10px">
+      <button class="pbtn" id="aSave">Simpan PIN admin</button>
+      <div class="err" id="aMsg"></div>
+      <h3 style="margin-top:18px">Pengaturan dari Google Sheet</h3>
+      
+      <input type="text" id="cUrl" placeholder="https://script.google.com/macros/s/…/exec?key=…&amp;a=config" style="margin-bottom:10px">
+      <div class="row"><button class="pbtn" id="cSave">Simpan link</button><button class="pbtn" id="cTest" style="background:var(--pri2)">Tes koneksi</button></div>
+      <div class="err" id="cMsg"></div><div id="syncSt" style="font-size:12px;color:var(--mut);margin-top:8px"></div>
+    </div>
+  </main>
+
+  <nav>
+    <button class="on" id="n1"><i><svg class="ic" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></i>Beranda</button>
+    <button id="n2"><i><svg class="ic" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg></i></button>
+    <button id="n3"><i><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.2-3.6 4.2-5 8-5s6.8 1.4 8 5"/></svg></i></button>
+    <button id="n4"><i><svg class="ic" viewBox="0 0 24 24"><path d="M10 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M15 8l4 4-4 4M19 12H9"/></svg></i></button>
+  </nav>
+
+  <div id="drawer"><div class="sheet"><div class="top"><img class="logo" style="width:64px;margin-bottom:8px" src="logo.png" alt=""><br>CBT UJIAN<br><small style="font-weight:400">SMP Negeri 3 Bojong</small></div>
+    <button class="it" data-go="home"><svg class="ic" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg> Home</button><button class="it" data-go="about"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.2-3.6 4.2-5 8-5s6.8 1.4 8 5"/></svg> About</button><button class="it" id="exitApp"><svg class="ic" viewBox="0 0 24 24"><path d="M10 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M15 8l4 4-4 4M19 12H9"/></svg> Exit</button>
+    <div style="padding:18px;font-size:13px;color:var(--mut)">© SMP Negeri 3 Bojong</div></div><div class="shade" id="shade"></div></div>
+
+  <section class="exam" id="exam">
+    <div class="bar"><span>⚠ Pelanggaran: <b id="viol">0</b></span><span><button id="fs">Layar penuh</button> <button id="reload">Muat ulang</button> <button id="done">Selesai</button></span></div>
+    <iframe id="frame" title="Ujian"></iframe>
+    <div class="sim" id="sim" hidden></div>
+  </section>
+
+  <div class="ov" id="warn"><div style="font-size:42px">⚠</div><b style="font-size:20px">Anda meninggalkan halaman ujian!</b><div>Pelanggaran tercatat: <b id="vn">1</b>. Tetap fokus pada ujian.</div><button id="back">Kembali ke ujian</button></div>
+  <div class="ov" id="pin"><div class="pbox"><b id="pinTitle">Masukkan PIN pengawas</b><div class="prow"><input type="password" id="pinIn" inputmode="numeric" autocomplete="off" placeholder="PIN"><button id="pinOk">OK</button><button id="pinNo" style="background:var(--pri2)">Batal</button></div><div class="err" id="pinErr"></div></div></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';document.head.appendChild(s)"></script>
+<script>
+/*CFG-START*/
+const CONFIG_URL="https://script.google.com/macros/s/AKfycbzqSnKCITVVOME9k2lB-qNeDCwGIAai5sdeAxgRTumAPixfs4oONm6CQ9AqAaY1pwj4Zg/exec?a=config"; // PIN & daftar ujian: langsung tersambung tanpa key
+const APP_KEY=""; // opsional: isi dengan SECRET (ADMIN-CBT.gs) agar laporan pelanggaran & cek PIN admin berjalan
+const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);return true}catch(e){return null}};
+const cfgUrl=()=>{let u=ls("cbt_cfg")||CONFIG_URL;if(APP_KEY&&u.includes("script.google.com/macros/")&&!/[?&]key=/.test(u))u+=(u.includes("?")?"&":"?")+"key="+encodeURIComponent(APP_KEY);return u};
+const getPin=()=>(cfgUrl()&&ls("cbt_pin_remote"))||ls("cbt_pin")||"1234";
+const setPin=p=>ls("cbt_pin",p)===true;
+function parseCfg(t){const o={};t.split(/\r?\n/).forEach(l=>{const i=l.indexOf(",");if(i<0)return;const k=l.slice(0,i).replace(/"/g,"").trim().toLowerCase(),v=l.slice(i+1).replace(/"/g,"").trim();if(k)o[k]=v});return o}
+function applyCfg(){}
+function setSt(t){const e=document.getElementById("syncSt");if(e)e.textContent=t}
+const getTk=()=>ls("cbt_tk")||"";
+async function syncConfig(ms){
+  const u=cfgUrl();if(!u){setSt("Server guru belum dipasang di aplikasi ini");return{ok:false,msg:"Link konfigurasi belum diisi."}}
+  try{
+    const c=new AbortController(),to=setTimeout(()=>c.abort(),ms||4000);
+    const r=await fetch(u,{cache:"no-store",signal:c.signal});clearTimeout(to);
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    const tx=await r.text();if(tx.trim()==="ERR")throw new Error("kode rahasia (key) salah");
+    const o=parseCfg(tx),okPin=/^\d{4,12}$/.test(o.pin||""),d=parseInt(o.durasi);
+    if(okPin)ls("cbt_pin_remote",o.pin);
+    ls("cbt_status_remote",(o.status||"buka").toLowerCase());
+    if(d>0)ls("cbt_dur_remote",String(d));else ls("cbt_dur_remote",null);
+    applyCfg();
+    setSt(okPin?"✓ Tersambung ke server guru":"⚠ Server terbaca, tetapi PIN tidak valid");
+    return{ok:okPin,msg:okPin?"Tersambung. PIN terbaca"+".":"Sheet terbaca, tetapi baris pin tidak valid (4–12 angka)."};
+  }catch(e){applyCfg();setSt("⚠ Belum tersambung ke server guru (memakai pengaturan terakhir)");return{ok:false,msg:"Gagal membaca sheet ("+(e.name==="AbortError"?"waktu habis":e.message||e)+"). Memakai pengaturan terakhir."}}
+}
+
+/* PIN per ujian: dibaca dari daftar ujian server (kosong = pakai PIN umum) */
+let examPinV="";
+const normL=u=>{try{const x=new URL(String(u||"").trim());x.searchParams.delete("embedded");return (x.host+x.pathname+x.search).toLowerCase().replace(/\/(viewform|edit)$/,"").replace(/\/+$/,"")}catch(e){return String(u||"").trim().toLowerCase().replace(/^https?:\/\//,"").replace(/\/+$/,"")}};
+let curId="";
+const pinFor=u=>{const m=(curId&&ALLX.find(x=>x.id===curId))||(u&&ALLX.find(x=>normL(x.link)===normL(u)));if(m&&!curId)curId=m.id;return m&&/^\d{4,12}$/.test(String(m.pin||"").trim())?String(m.pin).trim():""};
+const effPin=()=>examPinV||getPin();
+function pushPin(){if(window.Android&&Android.setPin)Android.setPin(effPin())}
+const isServer=()=>(cfgUrl()||"").includes("script.google.com/macros/");
+const isClosed=()=>!!cfgUrl()&&ls("cbt_status_remote")==="tutup";
+const devId=(()=>{let d=ls("cbt_id");if(!d){d="D"+Math.random().toString(36).slice(2,10);ls("cbt_id",d)}return d})();
+let vcount=0,active=false,hbT=null,endReason="selesai",flushing=false;
+const qGet=()=>{try{return JSON.parse(ls("cbt_q")||"[]")}catch(e){return[]}};
+async function flushQ(){
+  if(flushing)return;flushing=true;
+  try{const sent=new Set();
+    for(const u of qGet()){try{const r=await fetch(u,{cache:"no-store"});if(r.ok)sent.add(u)}catch(e){}}
+    ls("cbt_q",JSON.stringify(qGet().filter(u=>!sent.has(u)).slice(-200)));
+  }finally{flushing=false}
+}
+function report(ev,d,n){
+  if(!isServer())return;if(n!=null)vcount=n;
+  const u=new URL(cfgUrl());u.searchParams.set("a","log");
+  const P={id:devId,nm:"",kl:getTk(),ev:ev,d:d||"",n:vcount};
+  Object.keys(P).forEach(k=>u.searchParams.set(k,P[k]));
+  const q=qGet();q.push(u.toString());ls("cbt_q",JSON.stringify(q.slice(-200)));flushQ();
+}
+function forceClose(){endReason="ditutup admin";if(window.Android&&Android.forceEnd)Android.forceEnd();else endExam()}
+let pinT=null,pinBusy=false;
+async function syncPin(){if(pinBusy)return;pinBusy=true;try{await syncConfig(4000);if(active){await loadExams();examPinV=pinFor(curUrl);pushPin();if(isClosed())forceClose()}}finally{pinBusy=false}}
+async function hb(){report("hb");await syncPin()}
+window.__syncPin=async()=>{pinBusy=false;await syncPin();if(window.Android&&Android.pinChecked)Android.pinChecked()};
+function onEnded(){examPinV="";curId="";if(!active)return;active=false;clearInterval(hbT);clearInterval(pinT);report("selesai",endReason);endReason="selesai"}
+/*CFG-END*/
+const $=id=>document.getElementById(id);
+let t0=0,tick=null,viol=0,inExam=false,stream=null,afterPin=null,askAdmin=false,curUrl="",teacher=false,fails=0,lockUntil=0;
+
+function view(v){
+  $("home").hidden=v!=="home";$("about").hidden=v!=="about";
+  $("title").textContent=v==="home"?"Beranda":"Tentang";
+  $("n1").classList.toggle("on",v==="home");$("n3").classList.toggle("on",v==="about");
+  stopScan();if(v!=="about")setRole(false);if(v==="home")loadExams();
+}
+function norm(u){
+  u=(u||"").trim();if(!u||/\s/.test(u))return null;
+  if(!/^https?:\/\//i.test(u)){if(!/[a-z]/i.test(u))return null;u="https://"+u}
+  let x;try{x=new URL(u)}catch(e){return null}
+  if(!x.hostname.includes("."))return null;
+  if(x.hostname==="docs.google.com"&&x.pathname.includes("/forms/")){
+    x.pathname=x.pathname.replace(/\/edit$/,"/viewform");
+    x.searchParams.set("embedded","true");
+  }
+  return x.toString();
+}
+async function openExam(u){
+  curUrl=u;if(!ALLX.some(x=>x.id===curId&&normL(x.link)===normL(u)))curId="";$("err").textContent="";setRole(false);
+  if(cfgUrl()){$("err").style.color="var(--mut)";$("err").textContent="Memuat pengaturan…";await syncConfig(3000);$("err").textContent="";$("err").style.color=""}
+  if(isClosed()){$("err").textContent="Ujian sedang ditutup oleh admin.";return}
+  if(isServer())await loadExams();examPinV=pinFor(u);
+  active=true;vcount=0;endReason="selesai";report("mulai");clearInterval(hbT);hbT=setInterval(hb,60000);clearInterval(pinT);pinT=setInterval(syncPin,15000);
+  $("frame").hidden=false;$("sim").hidden=true;
+  $("frame").src=u;$("ext").href=u;startExam();
+}
+function startExam(){
+  inExam=true;viol=0;$("viol").textContent=0;
+  $("exam").classList.add("on");
+}
+function endExam(){
+  onEnded();inExam=false;clearInterval(tick);$("exam").classList.remove("on");
+  $("frame").src="about:blank";$("url").value="";
+  if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+}
+function violation(){
+  if(!inExam)return;viol++;$("viol").textContent=viol;$("vn").textContent=viol;$("warn").classList.add("on");if(active)report("pelanggaran","pindah halaman",viol);
+}
+document.addEventListener("visibilitychange",()=>{if(document.hidden){setRole(false);violation()}});
+
+$("go").onclick=()=>{
+  const u=norm($("url").value);
+  if(!u){$("err").textContent="Link tidak valid. Masukkan link lengkap, contoh: https://forms.gle/xxxx";return}
+  openExam(u);
+};
+$("url").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
+
+/* QR / Barcode */
+let detector=null;
+try{if("BarcodeDetector" in window)detector=new BarcodeDetector()}catch(e){detector=null}
+function stopScan(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$("vid").hidden=true}
+function scanDone(txt){
+  stopScan();const u=norm(txt);
+  if(u){$("url").value=txt;openExam(u)}
+  else $("err").textContent="Kode terbaca ("+String(txt).slice(0,40)+") tetapi bukan link. Gunakan QR berisi link ujian.";
+}
+$("scanBtn").onclick=async()=>{
+  $("err").textContent="";
+  if(!detector&&!window.jsQR){$("err").textContent="Pemindai belum siap (perlu internet untuk memuat). Sambungkan internet, buka ulang aplikasi, atau tempel link manual.";return}
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1280},height:{ideal:720}}});
+    const v=$("vid");v.srcObject=stream;v.hidden=false;await v.play();
+    const c=$("cv"),g=c.getContext("2d",{willReadFrequently:true});let busy=false;
+    (function loop(){
+      if(!stream)return;
+      if(v.videoWidth&&!busy){
+        busy=true;
+        (async()=>{
+          let txt=null;
+          if(detector){try{const r=await detector.detect(v);if(r&&r.length)txt=r[0].rawValue}catch(e){}}
+          if(!txt&&window.jsQR&&stream){
+            const k=Math.min(1,720/v.videoWidth);c.width=Math.round(v.videoWidth*k);c.height=Math.round(v.videoHeight*k);
+            g.drawImage(v,0,0,c.width,c.height);
+            const d=g.getImageData(0,0,c.width,c.height),r=jsQR(d.data,d.width,d.height,{inversionAttempts:"attemptBoth"});
+            if(r&&r.data)txt=r.data;
+          }
+          if(txt){scanDone(txt);return}
+          busy=false;
+        })();
+      }
+      requestAnimationFrame(loop);
+    })();
+  }catch(e){
+    stopScan();
+    $("err").textContent=(e&&e.name==="NotAllowedError")?"Izin kamera ditolak. Buka Pengaturan HP > Aplikasi > CBT > Izin > Kamera > Izinkan, lalu coba lagi.":"Kamera tidak bisa diakses ("+(e&&e.name||"error")+"). Tempel link secara manual.";
+  }
+};
+
+/* Simulasi */
+const QS=[
+ {q:"Perangkat yang berfungsi sebagai otak komputer adalah …",o:["Monitor","CPU","Keyboard","Speaker"],a:1},
+ {q:"Contoh perangkat lunak (software) adalah …",o:["Mouse","Printer","Browser","Flashdisk"],a:2},
+ {q:"1 byte sama dengan … bit.",o:["4","8","16","32"],a:1}];
+$("simBtn").onclick=()=>{
+  curUrl="";$("frame").hidden=true;$("sim").hidden=false;
+  $("sim").innerHTML=QS.map((q,i)=>`<div class="q"><b>${i+1}. ${q.q}</b>`+q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")+`</div>`).join("")+`<button class="pbtn" id="chk">Kirim jawaban</button><p id="res"></p>`;
+  $("chk").onclick=()=>{let s=0;QS.forEach((q,i)=>{const c=document.querySelector(`input[name=q${i}]:checked`);if(c&&+c.value===q.a)s++});
+    $("res").innerHTML=`Skor simulasi: <b>${s}/${QS.length}</b>`};
+  startExam();
+};
+
+/* Kontrol ujian */
+$("back").onclick=()=>$("warn").classList.remove("on");
+$("reload").onclick=()=>{if(curUrl)$("frame").src=curUrl};
+$("fs").onclick=()=>{const e=document.documentElement;(e.requestFullscreen?e.requestFullscreen():Promise.reject()).catch(()=>{})};
+$("done").onclick=()=>ask(endExam);
+function ask(cb,title,adm){afterPin=cb;askAdmin=!!adm;$("pinTitle").textContent=title||"Masukkan PIN pengawas";$("pinIn").value="";$("pinErr").textContent="";$("pin").classList.add("on");if(!adm&&active)syncPin();setTimeout(()=>$("pinIn").focus(),50)}
+$("pinNo").onclick=()=>$("pin").classList.remove("on");
+$("pinIn").addEventListener("keydown",e=>{if(e.key==="Enter")$("pinOk").click()});
+$("pinOk").onclick=async()=>{
+  const w=Math.ceil((lockUntil-Date.now())/1000),v=$("pinIn").value;
+  if(w>0){$("pinErr").textContent="Terlalu banyak percobaan. Coba lagi "+w+" detik.";return}
+  let ok=false,msg="PIN salah.";
+  if(askAdmin&&isServer()){ /* PIN admin diperiksa di server, tidak disimpan di HP */
+    $("pinErr").textContent="Memeriksa…";
+    try{
+      const u=new URL(cfgUrl());u.searchParams.set("a","admin");u.searchParams.set("p",v);
+      const t=(await (await fetch(u,{cache:"no-store"})).text()).trim();
+      ok=t==="OK";
+      if(t==="LOCK")msg="Terlalu banyak percobaan. Coba lagi beberapa menit.";
+      else if(t!=="OK"&&t!=="NO")msg="Server menolak permintaan. Periksa kode rahasia (key) di link konfigurasi.";
+    }catch(e){$("pinErr").textContent="Tidak bisa menghubungi server. Pastikan internet aktif.";return}
+  }else if(askAdmin)ok=v===getAdminPin();
+  else{ok=v===effPin();if(!ok&&active){$("pinErr").textContent="Memeriksa PIN terbaru…";pinBusy=false;await syncPin();ok=v===effPin()}}
+  if(ok){fails=0;$("pin").classList.remove("on");const f=afterPin;afterPin=null;f&&f()}
+  else{fails++;if(fails>=5){lockUntil=Date.now()+60000;fails=0;$("pinErr").textContent="PIN salah 5 kali. Dikunci 60 detik."}else $("pinErr").textContent=msg}
+};
+/* Peran: Siswa (bawaan) / Guru-Admin (butuh PIN, tidak disimpan) */
+function setRole(t){
+  teacher=!!t;$("tCard").hidden=!teacher;
+  $("roleTxt").innerHTML=teacher?"Mode: <b>Guru / Admin</b>. Pengaturan terbuka. Mode ini otomatis berakhir saat Anda meninggalkan halaman ini.":"Mode: <b>Siswa</b>. Pengaturan guru terkunci.";
+  $("roleBtn").textContent=teacher?"Keluar mode guru":"Masuk sebagai Guru / Admin";
+}
+$("roleBtn").onclick=()=>{if(teacher)setRole(false);else ask(()=>setRole(true),"PIN Guru / Admin",true)};
+setRole(false);
+let ALLX=(()=>{try{return JSON.parse(ls("cbt_exams")||"[]")}catch(e){return[]}})();
+function drawExams(){
+  const list=$("exList"),tk=getTk(),em=$("exEmpty");list.textContent="";
+  document.querySelectorAll(".tk").forEach(b=>b.classList.toggle("on",b.dataset.tk===tk));
+  if(!tk){em.textContent="Pilih kelas Anda untuk melihat daftar ujian.";return}
+  const xs=ALLX.filter(x=>x.tingkat==="semua"||x.tingkat===tk);
+  em.textContent=xs.length?"":"Belum ada ujian untuk kelas "+tk+".";
+  xs.forEach(x=>{
+    const b=document.createElement("button");b.className="exi";b.textContent=x.judul;
+    b.onclick=()=>{const n=norm(x.link);if(n){$("url").value=x.link;curId=x.id;openExam(n)}else $("err").textContent="Link ujian dari guru tidak valid."};
+    list.appendChild(b);
+  });
+}
+document.querySelectorAll(".tk").forEach(b=>b.onclick=()=>{ls("cbt_tk",b.dataset.tk);drawExams()});
+async function loadExams(){
+  const box=$("exBox");
+  if(!isServer()){box.hidden=true;return}
+  try{
+    const u=new URL(cfgUrl());u.searchParams.set("a","exams");
+    const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);
+    const tx=await r.text();if(tx.trim()==="ERR")throw new Error("key salah");
+    const j=JSON.parse(tx);ALLX=(j.exams||[]).map(x=>({...x,tingkat:x.tingkat||"semua"}));ls("cbt_exams",JSON.stringify(ALLX));
+    box.hidden=!ALLX.length;drawExams();
+  }catch(e){box.hidden=true;setSt("⚠ Daftar ujian gagal dimuat ("+(e.message||e)+")")}
+}
+$("cUrl").value=ls("cbt_cfg")||"";applyCfg();syncConfig();flushQ();loadExams();
+$("cSave").onclick=()=>{const m=$("cMsg"),bad=t=>{m.style.color="var(--bad)";m.textContent=t};
+  const u=$("cUrl").value.trim();if(u&&!/^https:\/\//i.test(u))return bad("Link harus diawali https://");
+  if(u)ls("cbt_cfg",u);else["cbt_cfg","cbt_pin_remote","cbt_dur_remote","cbt_status_remote"].forEach(k=>ls(k,null));
+  applyCfg();m.style.color="#2e7d32";m.textContent=u?"Link disimpan. Tekan Tes koneksi.":"Link dihapus."};
+$("cTest").onclick=async()=>{const m=$("cMsg");m.style.color="var(--mut)";m.textContent="Menguji…";const r=await syncConfig(5000);m.style.color=r.ok?"#2e7d32":"var(--bad)";m.textContent=r.msg};
+$("pSave").onclick=()=>{const m=$("pMsg"),bad=t=>{m.style.color="var(--bad)";m.textContent=t};
+  if(cfgUrl()&&ls("cbt_pin_remote"))return bad("PIN sedang diatur dari Google Sheet. Ubah PIN di sheet.");
+  const n=$("pNew").value;if(!/^\d{4,12}$/.test(n))return bad("PIN baru harus 4–12 angka.");
+  if(setPin(n)){m.style.color="#2e7d32";m.textContent="PIN berhasil diubah.";$("pNew").value=""}else bad("Gagal menyimpan PIN.")};
+
+const getAdminPin=()=>ls("cbt_apin")||getPin();
+$("aSave").onclick=()=>{const m=$("aMsg"),bad=t=>{m.style.color="var(--bad)";m.textContent=t};
+  if(isServer())return bad("PIN admin diatur dari halaman admin web (server).");
+  const n=$("aNew").value;if(!/^\d{4,12}$/.test(n))return bad("PIN admin harus 4–12 angka.");
+  if(n===getPin())return bad("PIN admin harus berbeda dari PIN keluar siswa.");
+  if(ls("cbt_apin",n)===true){m.style.color="#2e7d32";m.textContent="PIN admin disimpan.";$("aNew").value=""}else bad("Gagal menyimpan PIN admin.")};
+
+/* Navigasi */
+const dr=$("drawer");
+$("menuBtn").onclick=()=>dr.classList.add("open");$("shade").onclick=()=>dr.classList.remove("open");
+dr.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{view(b.dataset.go);dr.classList.remove("open")});
+$("n1").onclick=()=>view("home");$("n3").onclick=()=>view("about");
+$("n2").onclick=()=>{$("url").value="";$("err").textContent="";view("home")};
+const bye=()=>{dr.classList.remove("open");view("home");$("err").textContent="Aplikasi dapat ditutup dengan aman."};
+$("n4").onclick=bye;$("exitApp").onclick=bye;
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
+</body>
+</html>
